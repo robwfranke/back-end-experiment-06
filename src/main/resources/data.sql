@@ -1,13 +1,21 @@
 
-INSERT INTO users (username, password, enabled) VALUES ('user', '$2a$10$wPHxwfsfTnOJAdgYcerBt.utdAvC24B/DWfuXfzKBSDHO0etB1ica', TRUE);
-INSERT INTO users (username, password, enabled) VALUES ('admin', '$2a$10$wPHxwfsfTnOJAdgYcerBt.utdAvC24B/DWfuXfzKBSDHO0etB1ica', TRUE);
-INSERT INTO users (username, password, enabled) VALUES ('peter', '$2a$10$wPHxwfsfTnOJAdgYcerBt.utdAvC24B/DWfuXfzKBSDHO0etB1ica', TRUE);
+-- ************************** users ****************************************
 
-INSERT INTO authorities (username, authority) VALUES ('user', 'ROLE_USER');
-INSERT INTO authorities (username, authority) VALUES ('admin', 'ROLE_USER');
+INSERT INTO users (username, password, enabled) VALUES ('customer', '$2y$12$OTdFbEe9EqmvLJIVQrEf6OWO8AUagdfitwfVXVBefWv7C9hWAX9oG', TRUE);/*password: customer */
+INSERT INTO users (username, password, enabled) VALUES ('companyUser', '$2y$12$JrD.vYdK/ktqJ9sCwzGTfuRsfdz4EeI0dvF9/4jIAVXZkdDXlGUk.', TRUE);/*password: companyUser */
+INSERT INTO users (username, password, enabled) VALUES ('admin', '$2y$12$STmgp8r1FxIQpmOlD9osTuAnYZQ4s8qahccMT.vgatkEE6I8ev8s.', TRUE);/*password: admin */
+-- ******************************************************************************
+
+-- ************************** authorities ****************************************
+INSERT INTO authorities (username, authority) VALUES ('customer', 'ROLE_CUSTOMER');
+
+INSERT INTO authorities (username, authority) VALUES ('companyUser', 'ROLE_CUSTOMER');
+INSERT INTO authorities (username, authority) VALUES ('companyUser', 'ROLE_COMPANY-USER');
+
+INSERT INTO authorities (username, authority) VALUES ('admin', 'ROLE_CUSTOMER');
+INSERT INTO authorities (username, authority) VALUES ('admin', 'ROLE_COMPANY-USER');
 INSERT INTO authorities (username, authority) VALUES ('admin', 'ROLE_ADMIN');
-INSERT INTO authorities (username, authority) VALUES ('peter', 'ROLE_USER');
-INSERT INTO authorities (username, authority) VALUES ('peter', 'ROLE_ADMIN');
+-- ******************************************************************************
 
 
 INSERT INTO customers (customername, street,city, postal_code,email, tel_number,password, enabled) VALUES ('klant nr 1', 'hazenpad 1','Rotterdam', '1234AN', 'klant1@klant','0612345','$2a$10$wPHxwfsfTnOJAdgYcerBt.utdAvC24B/DWfuXfzKBSDHO0etB1ica', TRUE);
