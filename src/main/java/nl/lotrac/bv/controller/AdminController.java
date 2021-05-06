@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/admin")
 
 
-public class AdminController {
+public class
+AdminController {
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping(value = "")
     public ResponseEntity<Object> getMessage() {

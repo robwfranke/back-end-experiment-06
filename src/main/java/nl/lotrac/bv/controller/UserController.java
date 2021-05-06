@@ -1,5 +1,6 @@
 package nl.lotrac.bv.controller;
 
+import nl.lotrac.bv.model.MessageFrontEnd;
 import nl.lotrac.bv.model.User;
 import nl.lotrac.bv.exceptions.BadRequestException;
 import nl.lotrac.bv.service.UserService;
@@ -12,13 +13,17 @@ import java.net.URI;
 import java.util.Map;
 
 
-@CrossOrigin(origins = "*", maxAge=3600)
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping(value = "/users")
+
+
 public class UserController {
 
     @Autowired
     private UserService userService;
+
+    private MessageFrontEnd messageFrontEnd = new MessageFrontEnd();
 
 
     @GetMapping(value = "")
@@ -34,10 +39,12 @@ public class UserController {
     @PostMapping(value = "")
     public ResponseEntity<Object> createUser(@RequestBody User user) {
         String newUsername = userService.createUser(user);
+        messageFrontEnd.boodschap = ("User: " + newUsername+ "  created");
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{username}")
                 .buildAndExpand(newUsername).toUri();
 
-        return ResponseEntity.created(location).build();
+//        return ResponseEntity.created(location).build();
+        return ResponseEntity.created(location).body(messageFrontEnd);
     }
 
     @PutMapping(value = "/{username}")
@@ -59,7 +66,6 @@ public class UserController {
     }
 
 
-
     @GetMapping(value = "/{username}/authorities")
     public ResponseEntity<Object> getUserAuthorities(@PathVariable("username") String username) {
         return ResponseEntity.ok().body(userService.getAuthorities(username));
@@ -75,6 +81,7 @@ public class UserController {
             throw new BadRequestException();
         }
     }
+
     @DeleteMapping(value = "/{username}/authorities/{authority}")
     public ResponseEntity<Object> deleteUserAuthority(@PathVariable("username") String username, @PathVariable("authority") String authority) {
         userService.removeAuthority(username, authority);

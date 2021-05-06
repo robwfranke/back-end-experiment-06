@@ -21,6 +21,7 @@ public interface UserService {
     public abstract Collection<User> getUsers();
 
     public abstract Optional<User> getUser(String username);
+
     public abstract boolean userExists(String username);
 
     public abstract Collection<User> getAllAuthorities();

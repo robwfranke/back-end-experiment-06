@@ -2,15 +2,15 @@
 -- ************************** users ****************************************
 
 INSERT INTO users (username, password, enabled) VALUES ('customer', '$2y$12$OTdFbEe9EqmvLJIVQrEf6OWO8AUagdfitwfVXVBefWv7C9hWAX9oG', TRUE);/*password: customer */
-INSERT INTO users (username, password, enabled) VALUES ('companyUser', '$2y$12$JrD.vYdK/ktqJ9sCwzGTfuRsfdz4EeI0dvF9/4jIAVXZkdDXlGUk.', TRUE);/*password: companyUser */
+INSERT INTO users (username, password, enabled) VALUES ('user', '$2y$12$ib7HLC5a/du7UNFgRggGteXvr0SyclZiMSwdMXXZ1uwYyzFfBTkV.', TRUE);/*password: user */
 INSERT INTO users (username, password, enabled) VALUES ('admin', '$2y$12$STmgp8r1FxIQpmOlD9osTuAnYZQ4s8qahccMT.vgatkEE6I8ev8s.', TRUE);/*password: admin */
 -- ******************************************************************************
 
 -- ************************** authorities ****************************************
 INSERT INTO authorities (username, authority) VALUES ('customer', 'ROLE_CUSTOMER');
 
-INSERT INTO authorities (username, authority) VALUES ('companyUser', 'ROLE_CUSTOMER');
-INSERT INTO authorities (username, authority) VALUES ('companyUser', 'ROLE_COMPANY-USER');
+INSERT INTO authorities (username, authority) VALUES ('user', 'ROLE_CUSTOMER');
+INSERT INTO authorities (username, authority) VALUES ('user', 'ROLE_COMPANY-USER');
 
 INSERT INTO authorities (username, authority) VALUES ('admin', 'ROLE_CUSTOMER');
 INSERT INTO authorities (username, authority) VALUES ('admin', 'ROLE_COMPANY-USER');
