@@ -15,6 +15,8 @@ import java.util.Map;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
+
+
 @RequestMapping(value = "/users")
 
 
@@ -36,7 +38,7 @@ public class UserController {
         return ResponseEntity.ok().body(userService.getUser(username));
     }
 
-    @PostMapping(value = "")
+    @PostMapping(value = "/create_user")
     public ResponseEntity<Object> createUser(@RequestBody User user) {
         String newUsername = userService.createUser(user);
         messageFrontEnd.boodschap = ("User: " + newUsername+ "  created");
