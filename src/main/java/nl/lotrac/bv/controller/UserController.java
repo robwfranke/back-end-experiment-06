@@ -38,8 +38,9 @@ public class UserController {
         return ResponseEntity.ok().body(userService.getUser(username));
     }
 
-    @PostMapping(value = "/create_user")
+    @PostMapping(value = "")
     public ResponseEntity<Object> createUser(@RequestBody User user) {
+        System.out.println("UserController, createUser");
         String newUsername = userService.createUser(user);
         messageFrontEnd.boodschap = ("User: " + newUsername+ "  created");
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{username}")
