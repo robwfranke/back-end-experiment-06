@@ -12,10 +12,10 @@ public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
 
-//    @Id
+    //    @Id
     @Column(nullable = false, unique = true)
     private String customername;
 
@@ -63,6 +63,12 @@ public class Customer {
 //            orphanRemoval = true,
 //            fetch = FetchType.EAGER)
 
+
+
+
+    public Long getId() {
+        return id;
+    }
 
     public String getCustomername() {
         return customername;

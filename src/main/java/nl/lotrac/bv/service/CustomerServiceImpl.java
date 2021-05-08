@@ -1,14 +1,17 @@
 package nl.lotrac.bv.service;
 
+import nl.lotrac.bv.model.Customer;
 
 import nl.lotrac.bv.exceptions.RecordNotFoundException;
-import nl.lotrac.bv.model.Customer;
+import nl.lotrac.bv.exceptions.CustomernameExistsException;
+
 import nl.lotrac.bv.repository.CustomerRepository;
-import nl.lotrac.bv.utils.RandomStringGenerator;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.annotation.Id;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import nl.lotrac.bv.utils.RandomStringGenerator;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -23,6 +26,10 @@ public class CustomerServiceImpl implements CustomerService {
 
 
 
+    public boolean customerExists(String customername) {
+        return customerRepository.existsById(customername);
+    }
+
 
 
     @Override
@@ -32,10 +39,10 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
 
-@Override
+    @Override
     public Customer getCustomer(Long id) {
 
-    System.out.println("CustomerServiceImpl");
+        System.out.println("CustomerServiceImpl");
         Optional<Customer> customer = customerRepository.findById(id);
         if (customer.isEmpty()) {
             throw new RecordNotFoundException();
@@ -45,24 +52,23 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
 
-
-
     @Override
 
-    public String createNewCustomer (Customer customer){
+    public String createNewCustomer(Customer customer) {
+
+
 
         System.out.println("CustomerService Impl create newCustomer");
 
-
+        if (customerRepository.existsById(customer.getCustomername()))
+            throw new CustomernameExistsException("customer exists");
         String randomString = RandomStringGenerator.generateAlphaNumeric(20);
         customer.setApikey(randomString);
         customer.setPassword(passwordEncoder.encode(customer.getPassword()));
-        Customer newCustomer=customerRepository.save(customer);
+        Customer newCustomer = customerRepository.save(customer);
         return (newCustomer.getCustomername());
 
     }
-
-
 
 
 }

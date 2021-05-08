@@ -1,12 +1,16 @@
 package nl.lotrac.bv.service;
 
-import nl.lotrac.bv.exceptions.RecordNotFoundException;
+
 import nl.lotrac.bv.model.Authority;
 import nl.lotrac.bv.model.User;
 import nl.lotrac.bv.utils.RandomStringGenerator;
+
+import nl.lotrac.bv.exceptions.RecordNotFoundException;
 import nl.lotrac.bv.exceptions.UsernameExistsException;
 import nl.lotrac.bv.exceptions.UsernameNotFoundException;
+
 import nl.lotrac.bv.repository.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -26,7 +30,6 @@ public class UserServiceImpl implements UserService {
     private PasswordEncoder passwordEncoder;
 
 
-
     @Override
     public boolean userExists(String username) {
         return userRepository.existsById(username);
@@ -35,7 +38,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String createUser(User user) {
-        if (userRepository.existsById(user.getUsername())) throw new UsernameExistsException(user.getUsername()+"  exists!!");
+        if (userRepository.existsById(user.getUsername()))
+            throw new UsernameExistsException(user.getUsername() + "  exists!!");
         System.out.println("create user");
         String randomString = RandomStringGenerator.generateAlphaNumeric(20);
         user.setApikey(randomString);
@@ -70,14 +74,10 @@ public class UserServiceImpl implements UserService {
     }
 
 
-
-
-
     @Override
     public Collection<User> getAllAuthorities() {
         return userRepository.findAll();
     }
-
 
 
     @Override
