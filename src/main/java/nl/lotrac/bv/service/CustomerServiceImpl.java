@@ -26,9 +26,9 @@ public class CustomerServiceImpl implements CustomerService {
 
 
 
-    public boolean customerExists(String customername) {
-        return customerRepository.existsById(customername);
-    }
+//    public boolean customerExists(String customername) {
+//        return customerRepository.existsById(customername);
+//    }
 
 
 
@@ -40,7 +40,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 
     @Override
-    public Customer getCustomer(Long id) {
+    public Customer getCustomer(String id) {
 
         System.out.println("CustomerServiceImpl");
         Optional<Customer> customer = customerRepository.findById(id);

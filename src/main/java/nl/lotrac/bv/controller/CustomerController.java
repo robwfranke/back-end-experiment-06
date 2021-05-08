@@ -30,7 +30,7 @@ public class CustomerController {
 
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Object>getOneCustomer(@PathVariable("id")Long id){
+    public ResponseEntity<Object>getOneCustomer(@PathVariable("id")String id){
       return new ResponseEntity<>(customerService.getCustomer(id),HttpStatus.OK) ;
 }
 
