@@ -7,6 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import nl.lotrac.bv.service.CustomerService;
 import nl.lotrac.bv.service.BaseService;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -29,14 +32,17 @@ public class BaseController {
 
     @PostMapping(value="")
    public ResponseEntity<Object>createNewCustomer(@RequestBody Customer customer){
+
         System.out.println("BaseController, createNewCustomer");
 
         String newCustomername= customerService.createNewCustomer(customer);
 
-        messageFrontEnd.boodschap = ("User: " + newCustomername+ "  created");
+        messageFrontEnd.boodschap = ("Customer: " + newCustomername+ "  created");
 
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{customername}")
+                .buildAndExpand(newCustomername).toUri();
 
-  return ResponseEntity.noContent().build();
+  return ResponseEntity.created(location).body(messageFrontEnd);
     }
 
 }
