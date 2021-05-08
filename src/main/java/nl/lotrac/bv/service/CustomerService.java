@@ -14,6 +14,11 @@ public interface CustomerService {
 
     public abstract Customer getCustomer(Long id);
 
+    public abstract  String createNewCustomer(Customer customer);
+
+
+
+
 
 //
 //

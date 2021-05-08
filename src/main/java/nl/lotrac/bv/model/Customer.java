@@ -19,25 +19,25 @@ public class Customer {
     @Column(nullable = false, unique = true)
     private String customername;
 
-    @Column(nullable = false, length = 255)
+    @Column(length = 255)
     private String street;
 
-    @Column(nullable = false, length = 255)
+    @Column(length = 255)
     private String city;
 
-    @Column(nullable = false, length = 255)
+    @Column(length = 255)
     private String postal_code;
 
     @Column
     private String email;
 
-    @Column(nullable = false, length = 255)
+    @Column(length = 255)
     private String tel_number;
 
     @Column(nullable = false, length = 255)
     private String password;
 
-    @Column(nullable = false)
+    @Column
     private boolean enabled = true;
 
 //    customer haalt spring uit veld customer in de @MayToOne in order
