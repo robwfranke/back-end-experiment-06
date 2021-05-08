@@ -1,6 +1,7 @@
 package nl.lotrac.bv.controller;
 
 import nl.lotrac.bv.model.Customer;
+import nl.lotrac.bv.model.MessageFrontEnd;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,7 @@ public class BaseController {
 
     @Autowired
     private CustomerService customerService;
-    private BaseController baseService;
+    private MessageFrontEnd messageFrontEnd = new MessageFrontEnd();
 
 
 
@@ -26,12 +27,14 @@ public class BaseController {
     }
 
 
-//    public abstract  String createNewCustomer(Customer customer);
     @PostMapping(value="")
    public ResponseEntity<Object>createNewCustomer(@RequestBody Customer customer){
+        System.out.println("BaseController, createNewCustomer");
 
         String newCustomername= customerService.createNewCustomer(customer);
-        System.out.println("BaseController, createNewCustomer");
+
+        messageFrontEnd.boodschap = ("User: " + newCustomername+ "  created");
+
 
   return ResponseEntity.noContent().build();
     }

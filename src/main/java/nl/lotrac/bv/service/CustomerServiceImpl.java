@@ -7,6 +7,7 @@ import nl.lotrac.bv.repository.CustomerRepository;
 import nl.lotrac.bv.utils.RandomStringGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -16,6 +17,13 @@ import java.util.Optional;
 public class CustomerServiceImpl implements CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+
+
+
 
     @Override
     public Collection<Customer> getCustomers() {
@@ -48,6 +56,7 @@ public class CustomerServiceImpl implements CustomerService {
 
         String randomString = RandomStringGenerator.generateAlphaNumeric(20);
         customer.setApikey(randomString);
+        customer.setPassword(passwordEncoder.encode(customer.getPassword()));
         Customer newCustomer=customerRepository.save(customer);
         return (newCustomer.getCustomername());
 
